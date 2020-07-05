@@ -222,7 +222,7 @@
 		            	stai tradotti per poter essere analizzati e quindi sono stati usati anche dei servizi di traduzione.<br>
 						Le caratteristiche assegnate da Spotify e considerate nell'analisi sono:
 						<ul class="par">
-			                <li><strong>Acousticness</strong> che assume valori da 0 a 1 ed espime il fatto che la traccia sia acustica. Il valore di 1 rappresenta un'alta confidenza che la traccia è acustica.</li>
+			                <li><strong>Acousticness</strong> che assume valori da 0 a 1 ed espime il fatto che la traccia sia acustica. Il valore di 1 rappresenta un'alta confidenza che la traccia sia acustica.</li>
 			                <li><strong>Danceability</strong> che descrive quanto una traccia sia ballabile sulla base di una combinazione di elementi musicali tra cui tempo, stabilità del ritmo, forza del battito e regolarità generale. Assume valori compresi tra 0 e 1 e più è bassa e meno la canzone è ballabile.</li>
 			                <li><strong>Durata</strong> in secondi della traccia.</li>
 			                <li><strong>Energy</strong> assume valori da 0 a 1 e rappresenta una misura percettiva di intensità e attività. In genere, i brani energici si sentono veloci e rumorosi.</li>
@@ -302,7 +302,7 @@
 					<div class="section bg1">
 
 						<p class="par">
-						Partendo dai testi delle canzoni che sono state almeno una volte tra le migliori cinque in classifica per ongi paese nel periodo osservato, si è assegnato un valore di probabilità per ciascuna canzone di trattare uno di questi temi individuati a priori, detti anche topic:</p>
+						Partendo dai testi delle canzoni che sono state almeno una volte tra le migliori cinque in classifica per ogni paese nel periodo osservato, si è assegnato un valore di probabilità per ciascuna canzone di trattare uno di questi temi individuati a priori, detti anche topic:</p>
 						<ul class="par">
 			                <li>Amore</li>
 			                <li>Festa</li>
@@ -321,7 +321,7 @@
 
 						Poichè all'interno del testo di una canzone c'è una forte componente di ripetitività (come il ritornello) rispetto ad altri tipi di testi, contando il numero di volte che una parola compare nel testo si rischia di distorcere il reale significato del testo stesso. Per questo motivo sono state considerate le parole una sola volta. Per ciascuna parola è stata valutata la similarità semantica rispetto a undici topic attraverso un modello word2vec e una misura di similarità del coseno. Il massimo valore di similarità per ogni topic nel testo è stato considerato come misura della probabilità che la canzone possa trattare quel dato tema.<br>
 
-						Ad una stessa canzone sono stati assegnati più temi, si è visto però che per alcuni topic le similarità erano molto basse rispetto ad altri. Per questo motivo per assegnare un tema ad una canzone si è scelto il tema avente massima similarità con la canzone stessa tra i cinque più frequenti tra tutte le canzoni che sono: Amore, Festa, Politica, Amicizia, Soldi.<br>
+						Ad una stessa canzone sono stati assegnati più temi, si è visto però che per alcuni topic le similarità erano molto basse rispetto ad altri. Per questo motivo per assegnare un tema ad una canzone si è scelto quello avente massima similarità con la canzone stessa tra i cinque più frequenti tra tutte le canzoni che sono: Amore, Festa, Politica, Amicizia, Soldi.<br>
 
 						Nell'infografica si mostra l'andamento della frequenza dei cinque topic scelti nel periodo osservato.
 
@@ -361,7 +361,7 @@
 					<!-- hero content -->
 					<div class="hero-content " >
 						<!-- heading -->
-						<h4>Descrizione del campione di utenti</h4><hr>
+						<h3>Descrizione del campione di utenti</h3><hr>
 					</div>
 					<div class="hero-playlist"></div>
 
@@ -387,7 +387,7 @@
 					<!-- hero content -->
 					<div class="hero-content " >
 						<!-- heading -->
-						<h4>Valutazione prima infografica - mappa degli streams</h4>
+						<h3>Valutazione prima infografica - mappa degli streams</h3>
 						<hr>
 						<!-- paragraph -->
 						<p>Risultati dei test per la visualizzazione della <a href="#Mappa">mappa degli streams</a>.</p>
@@ -408,7 +408,7 @@
 
 		            <h4>Risultati test utente</h4>
 		            <p class="par">
-		                Sono stati posti agli utenti due differenti domande:</p>
+		                Sono stati posti agli utenti tre differenti domande:</p>
 		                <ul class="par">
 		                    <li>Quanti streams hanno gli Stati Uniti D'America?
 		                        <ul>
@@ -447,7 +447,7 @@
 					<!-- hero content -->
 					<div class="hero-content " >
 						<!-- heading -->
-						<h4>Valutazione seconda infografica - correlazione tra streams e features delle canzoni</h4>
+						<h3>Valutazione seconda infografica - correlazione tra streams e features delle canzoni</h3>
 						<hr>
 						<!-- paragraph -->
 						<p>Risultati dei test per la visualizzazione delle <a href="#Correlazioni">correlazioni tra streams e features delle canzoni</a></p>
@@ -457,7 +457,7 @@
 					<div class="section bg1">
 					<h4>Risultati test euristico</h4>
 		            <p class="par">
-		                Un problema che si è riscontrato è stato la scarsa conoscenza del significato delle varie features che quindi rendeva difficile l'interpretazionede della visualizzazione. Per ovviare a questo problema si sono inserite le descrizioni delle varie features come riportate sulla documentazione di Spotify. Questa modifica è stata accettata di buon grado aumentando la soddisfazione degli utenti. Un'ulteriore questione sollevada dagli utenti riguardava il livello di confidenza degli intervalli, per questo si è inserita questa informazione sia nella descrizione che precede la visualizzazione sia nell'etichetta che viene visualizza al passaggio del mouse sopra il valori.
+		                Un problema che si è riscontrato è stato la scarsa conoscenza del significato delle varie features che quindi rendeva difficile l'interpretazionede della visualizzazione. Per ovviare a questo problema si sono inserite le descrizioni delle varie features come riportate sulla documentazione di Spotify. Questa modifica è stata accettata di buon grado aumentando la soddisfazione degli utenti. Un'ulteriore questione sollevada dagli utenti riguardava il mostrare il livello di confidenza degli intervalli, per questo si è inserita questa informazione sia nella descrizione che precede la visualizzazione sia nell'etichetta che viene visualizza al passaggio del mouse sopra i valori.
 		            </p>
 
 
@@ -487,7 +487,7 @@
 		                            <li>Tempo mediano di risposta: 7,5 secondi</li>
 		                        </ul>
 		                    </li>
-		                    <li>Quale features tra Instrumentalness e Loudness è più correlata negativamente con il numero di streams per l'Italia?
+		                    <li>Quale features tra Instrumentalness e Loudness ha un valore di correlazione negativa maggiore con il numero di streams per l'Italia?
 		                        <ul>
 		                            <li>Risposta: Instrumentalness</li>
 		                            <li>Tempo medio di risposta: 6,875 secondi</li>
@@ -510,7 +510,7 @@
 				<!-- hero content -->
 				<div class="hero-content " >
 					<!-- heading -->
-					<h4>Valutazione terza infografica - andamento della frequenza dei temi nei testi delle canzoni</h4>
+					<h3>Valutazione terza infografica - andamento della frequenza dei temi nei testi delle canzoni</h3>
 					<hr>
 					<!-- paragraph -->
 					<p>Risultati dei test per la visualizzazione <a href="#Topic">dell'andamento della frequenza dei temi nei testi delle canzoni</a>.</p>
@@ -519,12 +519,6 @@
 				<div class="hero-playlist"></div>
 
 				<div class="section bg1">
-				<h4>Risultati test euristico</h4>
-	            <p class="par">
-	                Per questa visualizazione non sono emerse criricità da parte degli utenti.
-	            </p>
-
-
 	            <h4>Risultati test euristico</h4>
 		        <p class="par">
 		            Si è visto che alcuni utenti avevano difficoltà ad individuare l'esatta ampiezza dell'area rappresentante la frequenza per i vari temi, per ovviare a questo si è inserita la percentuale della frequenza rispetto al totale nelle etichette visibili durante l'interazione con l'infografica.<br>
@@ -557,7 +551,7 @@
 		                        <li>Tasso di errore: 0%</li>
 		                    </ul>
 		                </li>
-		                <li>In quale periodo il tem "Festa" raggiunge il massimo di frequenza?
+		                <li>In quale periodo il tema "Festa" raggiunge la sua massima frequenza?
 		                    <ul>
 		                        <li>Risposta: Ottobre 2019</li>
 		                        <li>Tempo medio di risposta: 7,625 secondi</li>
