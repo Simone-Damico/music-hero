@@ -2,7 +2,7 @@
 <html>
 	<head>
 		<meta charset="utf-8">
-		<title>Music-Hero</title>
+		<title>Music Hero</title>
 		
 		<!-- Styles -->
 		<!-- Bootstrap CSS -->
@@ -164,10 +164,10 @@
 						<div class="sm-right">
 							<!-- social link -->
 							<div class="sm-social-link">
-								<a class="h-facebook" href="#"><i class="fa fa-facebook"></i></a>
-								<a class="h-twitter" href="#"><i class="fa fa-twitter"></i></a>
-								<a class="h-google" href="#"><i class="fa fa-google-plus"></i></a>
-								<a class="h-linkedin" href="#"><i class="fa fa-linkedin"></i></a>
+								<a></a>
+								<a><i></i></a>
+								<a><i></i></a>
+								<a><i></i></a>
 							</div>
 						</div>
 						<div class="clearfix"></div>
@@ -203,7 +203,7 @@
 								<!-- banner caption -->
 								<div class="carousel-caption slide-one">
 									<!-- heading -->
-									<h2 class="animated fadeInLeftBig"><i class="fa fa-music"></i> Music-Hero</h2>
+									<h2 class="animated fadeInLeftBig"><i class="fa fa-music"></i> Music Hero</h2>
 									<!-- paragraph -->
 									<h3 class="animated fadeInRightBig">La canzone di successo a portata di mano</h3>
 								</div>
@@ -223,7 +223,7 @@
 					<!-- hero content -->
 					<div class="hero-content ">
 						<!-- heading -->
-						<h2>Music-Hero</h2>
+						<h2>Music Hero</h2>
 						<hr>
 						<!-- paragraph -->
 						<p>Come creare una canzone di successo</p>
@@ -231,7 +231,7 @@
 					</div>
 					<div class="hero-playlist">
 						<p class="par">
-		            	L'obiettivo del progetto è quello di capire quali informazionie possono essere interessanti per un utente che debba sviluppare una canzone di successo. 
+		            	L'obiettivo del progetto è quello di capire quali informazioni possono essere interessanti per un utente che debba sviluppare una canzone di successo. 
 		            	In particolare, dopo aver ricercato ed acquisito i dati necessari, si cerca di fornire una panoramica delle canzoni di successo e delle loro caratteristiche, in diverse aree geografiche.<br>
 		            	La caratterizzazione delle canzoni è fornita direttamente da Spotify, il popolare servizio di streaming musicale. Queste caratteristiche includono dati quantitativi come ad esempio la durata di una canzone e valori qualitativi come ad esempio la "danceability" (grado di propensione ad essere ballata) e l'"energy" di una canzone. Questi valori sono calcolati da Spotify e rappresentano come le canzoni sono percepite dal pubblico che le ascolta.<br>
 		            	I dati fin qui raccolti sono stati integrati con i testi delle canzoni. Questi sono stati acquisiti grazie alle API di Genius. Alcuni dei seguenti testi sono
@@ -318,22 +318,29 @@
 					<div class="section bg1">
 
 						<p class="par">
-			            In questa visualizzazione vengono riportati i risultati di uno studio del testo delle canzoni che hanno popolato le prime 5 posizioni delle classifiche di ciascun paese nel periodo d’interesse. A ciascun testo di una canzone è stato assegnato un livello di similarità con dei temi precedentemente individuati, selezionando i più popolari tra le canzoni. Nella visualizzazione vengono mostrati i primi 5 temi più rilevanti:</p>
-			            <ul class="par">
+						Partendo dai testi delle canzoni che sono state almeno una volte tra le migliori cinque in classifica per ongi paese nel periodo osservato, si è assegnato un valore di probabilità per ciascuna canzone di trattare uno di questi temi individuati a priori, detti anche topic:</p>
+						<ul class="par">
 			                <li>Amore</li>
 			                <li>Festa</li>
 			                <li>Politica</li>
 			                <li>Amicizia</li>
 			                <li>Soldi</li>
+			                <li>Sesso</li>
+			                <li>Droga</li>
+			                <li>Alcohol</li>
+			                <li>Tema etnico</li>
+			                <li>Religiosità</li>
+			                <li>Violenza</li>
 			            </ul>
-						<p class="par">
-						Partendo dai testi delle canzoni, si è assegnato un valore di probabilità per ciascuna canzone di trattare uno dei temi sopracitati, detti topic. Un topic non esclude l'altro, infatti è possibile che una canzone possa parlare contemporaneamente di più temi, ad esempio festa e soldi insieme. Per questo motivo le probabilità sono slegate tra i vari temi. Sono state considerate solo le prime cinque canzoni in classifica per ciascun paese e per ogni giorno.<br>
+			            <p class="par">
+			            Un topic non esclude l'altro, infatti è possibile che una canzone possa parlare contemporaneamente di più temi, ad esempio festa e soldi insieme. Per questo motivo le probabilità sono slegate tra i vari temi. I testi delle canzoni considerate sono stati proccessati per poi poter essere analizzati. Per prima cosa sono state tradotte tutte le parole delle canzoni scritte in una lingua diversa dall'inglese. Successivamente è stata effettuata una tokenizzazione del testo, "spezzando" dunque tutte le parole del testo. Infine sono state eliminate tutte quelle parole che non avessero un significato intrinseco ("stopwords" o parole come "yeah", "oh", ecc..).<br>
 
-						I testi delle canzoni considerate sono stati proccessati per poi poter essere analizzati. Per prima cosa sono state tradotte tutte le parole delle canzoni scritte in una lingua diversa dall'inglese. Successivamente è stata effettuata una tokenizzazione del testo, "spezzando" dunque tutte le parole del testo. Infine sono state eliminate tutte quelle parole che non avessero un significato intrinseco ("stopwords" o parole come "yeah", "oh", ecc..).<br>
+						Poichè all'interno del testo di una canzone c'è una forte componente di ripetitività (come il ritornello) rispetto ad altri tipi di testi, contando il numero di volte che una parola compare nel testo si rischia di distorcere il reale significato del testo stesso. Per questo motivo sono state considerate le parole una sola volta. Per ciascuna parola è stata valutata la similarità semantica rispetto a undici topic attraverso un modello word2vec e una misura di similarità del coseno. Il massimo valore di similarità per ogni topic nel testo è stato considerato come misura della probabilità che la canzone possa trattare quel dato tema.<br>
 
-						Poichè all'interno del testo di una canzone c'è una forte componente di ripetitività (come il ritornello) rispetto ad altri tipi di testi, contando il numero di volte che una parola compare nel testo si rischia di distorcere il reale significato del testo stesso. Per questo motivo sono state considerate le parole una sola volta. Per ciascuna parola è stata valutata la similarità semantica rispetto agli 11 temi sopraelencati attraverso un modello word2vec e una misura di similarità del coseno. Il massimo valore di similarità per ogni topic nel testo è stato considerato come misura della probabilità che la canzone possa trattare quel dato tema.<br>
+						Ad una stessa canzone sono stati assegnati più temi, si è visto però che per alcuni topic le similarità erano molto basse rispetto ad altri. Per questo motivo per assegnare un tema ad una canzone si è scelto il tema avente massima similarità con la canzone stessa tra i cinque più frequenti tra tutte le canzoni che sono: Amore, Festa, Politica, Amicizia, Soldi.<br>
 
-						Raggruppando i giorni in stagioni, è stata calcolata la media delle probabilità che ogni tema fosse rappresentativo dei testi delle canzoni di quella stagione. Le bande colorate intorno al valore medio puntuale indicano l'intervallo di confidenza al 95% per il valor medio della probabilità descritta.
+						Nell'infografica si mostra l'andamento della frequenza dei cinque topic scelti nel periodo osservato.
+
 						</p>
 						<div class="hero-playlist"></div>
 						<div class="bg1 section center" style="float:left;width:100%;">
@@ -503,7 +510,7 @@
 		                <p class="par">Si mostra la distriduzione dei tempi di risposta tramite uno violin plot.</p>
 		            </p>
 		            <div>
-		                <img class="imgCenter"src="img/banner/ViolinPlot2.png">
+		                <img class="imgCenter" src="img/banner/ViolinPlot2.png">
 		            </div>
 				</div>
 			</div>
@@ -574,7 +581,7 @@
 		            <p class="par">Si mostra la distriduzione dei tempi di risposta tramite uno violin plot.</p>
 		        </p>
 		        <div>
-		            <img class="imgCenter" src="img/banner/ViolinPlot3.png"
+		            <img class="imgCenter" src="img/banner/ViolinPlot3.png">
 		        </div>
 			</div>
 		</div>
@@ -593,11 +600,11 @@
 		            Corso di laurea magistrale in Data Science<br>
 		            Università degli studi di Milano Bicocca - Dipartimento di Informatica, Sistemistica e Comunicazione DISCo</li>
 		            <li>Martino Lorenzo Tenconi - 803154<br>
-		            Università degli studi di Milano Bicocca - Dipartimento di Informatica, Sistemistica e Comunicazione DISCo</li>
 		            Corso di laurea magistrale in Data Science<br>
+		            Università degli studi di Milano Bicocca - Dipartimento di Informatica, Sistemistica e Comunicazione DISCo</li>
 		            <li>Simone D’amico - 850369<br>
-		            Università degli studi di Milano Bicocca - Dipartimento di Informatica, Sistemistica e Comunicazione DISCo</li>
 		            Corso di laurea magistrale in Data Science<br>
+		            Università degli studi di Milano Bicocca - Dipartimento di Informatica, Sistemistica e Comunicazione DISCo</li>
 		        </ul>
 		    </div>
 		</div>
