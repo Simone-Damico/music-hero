@@ -1,0 +1,607 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>Music-Hero</title>
+		
+		<!-- Styles -->
+		<!-- Bootstrap CSS -->
+		<link href="css/bootstrap.min.css" rel="stylesheet">	
+		<!-- Animate CSS -->
+		<link href="css/animate.min.css" rel="stylesheet">
+		<!-- Basic stylesheet 
+		<link rel="stylesheet" href="css/owl.carousel.css">-->
+		<!-- Font awesome CSS -->
+		<link href="css/font-awesome.min.css" rel="stylesheet">		
+		<!-- Custom CSS -->
+		<link href="css/style.css" rel="stylesheet">
+		<link href="css/style-color.css" rel="stylesheet">
+		
+		<!-- Favicon -->
+		<link rel="shortcut icon" href="img/logo/favicon.ico">
+
+		<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  		<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+    	<script type="text/javascript" src="https://public.tableau.com/javascripts/api/tableau-2.min.js"></script>
+
+    	<script type="text/javascript">
+        var viz;
+
+        function mapViz() {
+            var containerDiv = document.getElementById("vizContainer"),
+            url = "https://public.tableau.com/views/viz_finali/mappaDash",
+            options = {
+                "Country": "",
+			    hideTabs: true,
+			    hideToolbar: true,
+                onFirstInteractive: function () {
+                    listenToMarksSelection();
+                }
+                
+            };
+
+            mappa = new tableau.Viz(containerDiv, url, options);
+        }
+
+        function corrViz() {
+            var containerDiv = document.getElementById("corrVizContainer"),
+            url = "https://public.tableau.com/views/viz_finali/corrDash";
+            options = {
+                "Country": "Global",
+			    hideTabs: true,
+			    hideToolbar: true,
+                
+            };
+
+            corr = new tableau.Viz(containerDiv, url, options);
+        }
+
+        function topicViz() {
+            var containerDiv = document.getElementById("topicViz"),
+            url = "https://public.tableau.com/views/viz_finali/topicDash",
+            options = {
+                hideTabs: true                
+            };
+
+            topic = new tableau.Viz(containerDiv, url, options);
+        }
+
+       
+
+        function listenToMarksSelection() {
+            mappa.addEventListener(tableau.TableauEventName.MARKS_SELECTION, onMarksSelection);
+        }
+
+        function onMarksSelection(marksEvent) {
+            return marksEvent.getMarksAsync().then(reportSelectedMarks);
+        }
+
+        function reportSelectedMarks(marks) {
+
+            for (var markIndex = 0; markIndex < marks.length; markIndex++) {
+                var pairs = marks[markIndex].getPairs();
+
+                for (var pairIndex = 0; pairIndex < pairs.length; pairIndex++) {
+                    var pair = pairs[pairIndex];
+                    if ((pair.fieldName === "usa" || pair.fieldName === "!usa" ) && pair.value) {var selCountry = pair.formattedValue}
+                }
+            }
+
+            var corrV = corr.getWorkbook().getActiveSheet().getWorksheets()[0];
+            if (!selCountry) {
+                corrV.applyFilterAsync("Country", "Global", tableau.FilterUpdateType.REPLACE);
+            } else {
+            	console.log("dddd", selCountry);
+                corrV.applyFilterAsync("Country", selCountry, tableau.FilterUpdateType.REPLACE);
+            }
+        }
+
+
+
+        var viz;
+
+        function datiCampione() {
+            var containerDiv = document.getElementById("datiCampione"),
+            url = "https://public.tableau.com/views/prova_questionari/datiCampione",
+            options = {
+                hideTabs: true,
+                hideToolbar: true
+                
+            };
+
+            datiCampione = new tableau.Viz(containerDiv, url, options);
+        }
+
+        function dashMappa() {
+            var containerDiv = document.getElementById("dashMappa"),
+            url = "https://public.tableau.com/views/prova_questionari/dashMappa",
+            options = {
+                hideTabs: true,
+                hideToolbar: true,
+                
+            };
+
+            dashMappa = new tableau.Viz(containerDiv, url, options);
+        }
+
+         function dashCorr() {
+            var containerDiv = document.getElementById("dashCorr"),
+            url = "https://public.tableau.com/views/prova_questionari/dashCorr",
+            options = {
+                hideTabs: true,
+                hideToolbar: true,
+                
+            };
+
+            dashCorr = new tableau.Viz(containerDiv, url, options);
+        }
+
+         function dashTopic() {
+            var containerDiv = document.getElementById("dashTopic"),
+            url = "https://public.tableau.com/views/prova_questionari/dashTopic",
+            options = {
+                hideTabs: true,
+                hideToolbar: true,
+                
+            };
+
+            dashTopic = new tableau.Viz(containerDiv, url, options);
+        }</script>
+	</head>
+	
+	<body onload="mapViz();topicViz();corrViz();datiCampione();dashMappa();dashCorr();dashTopic()">
+		
+		<!-- wrapper -->
+		<div class="wrapper" id="home">
+		
+			<!-- header area -->
+			<header>
+				<!-- secondary menu -->
+				<nav class="secondary-menu">
+					<div class="container">
+						<!-- secondary menu right link area -->
+						<div class="sm-right">
+							<!-- social link -->
+							<div class="sm-social-link">
+								<a class="h-facebook" href="#"><i class="fa fa-facebook"></i></a>
+								<a class="h-twitter" href="#"><i class="fa fa-twitter"></i></a>
+								<a class="h-google" href="#"><i class="fa fa-google-plus"></i></a>
+								<a class="h-linkedin" href="#"><i class="fa fa-linkedin"></i></a>
+							</div>
+						</div>
+						<div class="clearfix"></div>
+					</div>
+				</nav>
+				<!-- primary menu -->
+				<nav class="navbar navbar-fixed-top navbar-default">
+					<div class="container">
+						<!-- Collect the nav links, forms, and other content for toggling -->
+						<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+							<ul class="nav navbar-nav navbar-right">
+								<li><a href="#Introduzione">Introduzione</a></li>
+								<li><a href="#Mappa">Mappa</a></li>
+								<li><a href="#Correlazioni">Correlazioni</a></li>
+								<li><a href="#Topic">Topic</a></li>
+								<li><a href="#Valutazione">Valutazioni</a></li>
+								<li><a href="#Team">Team</a></li>
+							</ul>
+						</div><!-- /.navbar-collapse -->
+					</div><!-- /.container-fluid -->
+				</nav>
+			</header>
+			<!--/ header end -->
+			
+			<!-- banner area -->
+			<div class="banner">
+				<div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+					<!-- Wrapper for slides -->
+					<div class="carousel-inner" role="listbox">
+						<div class="item active">
+							<img src="img/banner/b1.jpg" alt="...">
+							<div class="container">
+								<!-- banner caption -->
+								<div class="carousel-caption slide-one">
+									<!-- heading -->
+									<h2 class="animated fadeInLeftBig"><i class="fa fa-music"></i> Music-Hero</h2>
+									<!-- paragraph -->
+									<h3 class="animated fadeInRightBig">La canzone di successo a portata di mano</h3>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!--/ banner end -->
+			
+			<!-- block for animate navigation menu -->
+			<div class="nav-animate"></div>
+			
+			<!-- Hero block area -->
+			<div id="Introduzione" class="hero pad">
+				<div class="container">
+					<!-- hero content -->
+					<div class="hero-content ">
+						<!-- heading -->
+						<h2>Music-Hero</h2>
+						<hr>
+						<!-- paragraph -->
+						<p>Come creare una canzone di successo</p>
+
+					</div>
+					<div class="hero-playlist">
+						<p class="par">
+		            	L'obiettivo del progetto è quello di capire quali informazionie possono essere interessanti per un utente che debba sviluppare una canzone di successo. 
+		            	In particolare, dopo aver ricercato ed acquisito i dati necessari, si cerca di fornire una panoramica delle canzoni di successo e delle loro caratteristiche, in diverse aree geografiche.<br>
+		            	La caratterizzazione delle canzoni è fornita direttamente da Spotify, il popolare servizio di streaming musicale. Queste caratteristiche includono dati quantitativi come ad esempio la durata di una canzone e valori qualitativi come ad esempio la "danceability" (grado di propensione ad essere ballata) e l'"energy" di una canzone. Questi valori sono calcolati da Spotify e rappresentano come le canzoni sono percepite dal pubblico che le ascolta.<br>
+		            	I dati fin qui raccolti sono stati integrati con i testi delle canzoni. Questi sono stati acquisiti grazie alle API di Genius. Alcuni dei seguenti testi sono
+		            	stai tradotti per poter essere analizzati e quindi sono stati usati anche dei servizi di traduzione.<br>
+						Le caratteristiche assegnate da Spotify e considerate nell'analisi sono:
+						<ul class="par">
+			                <li><strong>Acousticness</strong> che assume valori da 0 a 1 ed espime il fatto che la traccia sia acustica. Il valore di 1 rappresenta un'alta confidenza che la traccia è acustica.</li>
+			                <li><strong>Danceability</strong> che descrive quanto una traccia sia ballabile sulla base di una combinazione di elementi musicali tra cui tempo, stabilità del ritmo, forza del battito e regolarità generale. Assume valori compresi tra 0 e 1 e più è bassa e meno la canzone è ballabile.</li>
+			                <li><strong>Durata</strong> in secondi della traccia.</li>
+			                <li><strong>Energy</strong> assume valori da 0 a 1 e rappresenta una misura percettiva di intensità e attività. In genere, i brani energici si sentono veloci e rumorosi.</li>
+			                <li><strong>Instrumentalness</strong> denota se una traccia non contiene voci. I suoni "Ooh" e "aah" sono trattati come strumentali in questo contesto. Varia tra 0 e 1, più il suo valore è vicino a 1, maggiore è la probabilità che la traccia non contenga alcun contenuto vocale.</li>
+			                <li><strong>Loudness</strong> rappresenta il volume generale di una traccia in decibel (dB). I valori di Loudness sono mediati su tutta la traccia. I valori tipici sono compresi tra -60 e 0 db.</li>
+			                <li><strong>Speechiness</strong> misura la presenza di parole pronunciate in una traccia. Più la registrazione è simile al parlato, più il valore dell'attributo è vicino a 1. I valori superiori a 0,66 descrivono tracce che sono probabilmente fatte interamente di parole pronunciate. I valori compresi tra 0,33 e 0,66 descrivono tracce che possono contenere sia musica che parlato. I valori inferiori a 0,33 rappresentano molto probabilmente la musica e altre tracce non vocali.</li>
+			                <li><strong>Tempo</strong> complessivo stimato di una traccia in battiti al minuto (BPM). Nella terminologia musicale, il tempo è la velocità o il ritmo di un dato brano e deriva direttamente dalla durata media della battuta.</li>
+			                <li><strong>Valence</strong> assume valori da 0 a 1 e descrive la positività musicale trasmessa da una traccia. Le tracce con alta valenza sono associabili a sentimenti positivi (ad es. Felicità, allegria, euforia), mentre le tracce con bassa valenza richiamano sentimenti più negativi (ad esempio tristezza, depressione, rabbia).</li>
+						</ul>
+						</p>
+						<p class="par">
+							Per l'implementazione del progetto si è usato il linguaggio Python e varie sue librerie, il codice completo è disponibile <a href="https://matplotlib.org/">qui</a>.<br>
+							Per la realizzazione delle visualizzazioni si è utilizzato il software di visualizzazione di dati interattivo <a href="https://tableau.com/it-it">Tableou</a> e le librerie di Python <a href="https://matplotlib.org/">matplotlib</a> e <a href="https://seaborn.pydata.org/">seaborn</a> per la realizzazione dei violin plot nella vase di valutazioni.<br>
+							Le visualizzazioni sono disponibili anche sulla piattaforma <a href="https://public.tableau.com/s/">Tableou public</a>: <a href="https://public.tableau.com/profile/simone2504#!/vizhome/Music-Hero/mappaDash">qui</a> le visualizzazioni e <a href="https://public.tableau.com/profile/simone2504#!/vizhome/Music-HeroValutazioni/datiCampione">qui</a> le valutazioni.
+						</p>
+					</div>
+				</div>
+			</div>
+			<!--/ hero end -->
+
+			<div id= "Mappa" class="hero pad">
+				<div class="container">
+					<!-- hero content -->
+					<div class="hero-content">
+						<!-- heading -->
+						<h2>Mappa degli streams</h2><hr>
+					</div>
+					<div class="hero-playlist"></div>
+
+					<div class="section bg1">
+
+						<p class="par">
+							In questa visualizzazione si mostra la mappa dei paesi per cui sono stati raccolti i dati da Spotify con un'intensità di colore che dipende dal numero di streams complessivi per quel paese; in questo modo è possibile anche capire su quali mercati nazionali concentrarsi per la pubblicazione di canzoni.<br>
+				            Il numero di streams per paese è calcolato come la media degli streams al giorno per il periodo di osservazione, essendo un valore medio si mostrano anche gli intervalli di confidenza al 95%.
+						</p>
+
+						<div class="hero-playlist"></div>
+
+						<div id="navleft"  class="bg1 section center" style="float:left; width:100%;">
+							<div id="vizContainer" style="width:1000px;height:800px"></div>
+						</div>
+					</div>
+				</div>
+
+				<div id= "Correlazioni" class="hero pad">
+					<div class="container">
+						<!-- hero content -->
+						<div class="hero-content " >
+							<!-- heading -->
+							<h2>Correlazioni tra streams e features</h2><hr>
+						</div>
+
+						<div class="hero-playlist"></div>
+
+						<div class="section bg1">
+							<p class="par">
+							Nella seguente visualizzazione si mostrano le correlzioni tra le varie features e gli streams medi per paese. Selezionando uno specifico paese, tramite l'apposito filtro o dalla mappa soprastante, vengono mostrate le correlazioni e i relativi intervalli di confidenza al 95%. Il numero di stream di un paese è stato calcolato usando la media di streams per qual paese. 
+							</p>
+
+							<div class="hero-playlist"></div>
+							
+							<div id="content" class="bg1 section center" style="float:left;width:100%;">
+					            <div id="corrVizContainer" style="width:1000px;height:700px"></div>
+					        </div>
+						</div>
+					</div>
+				</div>
+
+			<div id= "Topic" class="hero pad">
+				<div class="container">
+					<!-- hero content -->
+					<div class="hero-content " >
+						<!-- heading -->
+						<h2>Analisi dei temi dei testi delle canzoni</h2><hr>
+					</div>
+					<div class="hero-playlist"></div>
+					<div class="section bg1">
+
+						<p class="par">
+			            In questa visualizzazione vengono riportati i risultati di uno studio del testo delle canzoni che hanno popolato le prime 5 posizioni delle classifiche di ciascun paese nel periodo d’interesse. A ciascun testo di una canzone è stato assegnato un livello di similarità con dei temi precedentemente individuati, selezionando i più popolari tra le canzoni. Nella visualizzazione vengono mostrati i primi 5 temi più rilevanti:</p>
+			            <ul class="par">
+			                <li>Amore</li>
+			                <li>Festa</li>
+			                <li>Politica</li>
+			                <li>Amicizia</li>
+			                <li>Soldi</li>
+			            </ul>
+						<p class="par">
+						Partendo dai testi delle canzoni, si è assegnato un valore di probabilità per ciascuna canzone di trattare uno dei temi sopracitati, detti topic. Un topic non esclude l'altro, infatti è possibile che una canzone possa parlare contemporaneamente di più temi, ad esempio festa e soldi insieme. Per questo motivo le probabilità sono slegate tra i vari temi. Sono state considerate solo le prime cinque canzoni in classifica per ciascun paese e per ogni giorno.<br>
+
+						I testi delle canzoni considerate sono stati proccessati per poi poter essere analizzati. Per prima cosa sono state tradotte tutte le parole delle canzoni scritte in una lingua diversa dall'inglese. Successivamente è stata effettuata una tokenizzazione del testo, "spezzando" dunque tutte le parole del testo. Infine sono state eliminate tutte quelle parole che non avessero un significato intrinseco ("stopwords" o parole come "yeah", "oh", ecc..).<br>
+
+						Poichè all'interno del testo di una canzone c'è una forte componente di ripetitività (come il ritornello) rispetto ad altri tipi di testi, contando il numero di volte che una parola compare nel testo si rischia di distorcere il reale significato del testo stesso. Per questo motivo sono state considerate le parole una sola volta. Per ciascuna parola è stata valutata la similarità semantica rispetto agli 11 temi sopraelencati attraverso un modello word2vec e una misura di similarità del coseno. Il massimo valore di similarità per ogni topic nel testo è stato considerato come misura della probabilità che la canzone possa trattare quel dato tema.<br>
+
+						Raggruppando i giorni in stagioni, è stata calcolata la media delle probabilità che ogni tema fosse rappresentativo dei testi delle canzoni di quella stagione. Le bande colorate intorno al valore medio puntuale indicano l'intervallo di confidenza al 95% per il valor medio della probabilità descritta.
+						</p>
+						<div class="hero-playlist"></div>
+						<div class="bg1 section center" style="float:left;width:100%;">
+				    		<div id="topicViz" style="width:1200px; height:700px;"></div>
+				        </div>
+					</div>
+				</div>
+			</div>
+
+
+			<div id= "Valutazione" class="hero pad">
+				<div class="container">
+					<!-- hero content -->
+					<div class="hero-content " >
+						<!-- heading -->
+						<h2>Valutazioni delle infografiche</h2><hr>
+					</div>
+					<div class="hero-playlist"></div>
+
+					<div class="section bg1">
+					<p class="par">
+						La valutazione di ogni infografica è stata effettuata con tre metodologie:
+				        <ul class="par">
+				            <li>Valutazioni euristiche: si sono sottoposte le visualizzazioni a degli utenti ed è stato chiesto loro di commentarle ad alta voce. E' stato possibile, in questo modo, identificare delle criticità che rendevano difficile l'interazione con le visualizzazioni e la loro interpretazione.</li>
+				            <li>Questionari psicometrici: si sono sottoposti a degli utenti un questionario diviso in due sezioni: nella prima venivano chieste delle caratteristiche dell'utente stesso come il sesso, l'età e il titolo di studio, nella seconda sezione si chiedeva di valutare le visualizzazione utilizzando la scala Cabitza-Locoro. I risultati dei questionari sono mostrati utilizzando un diagramma stacked bar e una heat map con le correlazioni tra le diverse caratteristiche valutate.</li>
+				            <li>User test: un gruppo di utenti hanno risposto a delle domande utilizzando le varie visualizzazioni. Si è misurato il tempo di risposta per ogni utente e si è calcolato il tasso di errore della risposta. La distribuzione dei valori del tempo di risposta è visualizzata tramite un diagramma a violino per ogni domanda posta agli utenti.</li>
+				        </ul>
+				        <p class="par">Per ogni visualizzazione si mostrano i risultati delle valutazioni.</p>
+					</div>
+				</div>
+
+				<div id= "Campione" class="hero pad">
+				<div class="container">
+					<!-- hero content -->
+					<div class="hero-content " >
+						<!-- heading -->
+						<h4>Descrizione del campione di utenti</h4><hr>
+					</div>
+					<div class="hero-playlist"></div>
+
+					<div class="section bg1">
+					<p class="par">
+			            Si è sottoposto il questionario psicometrico ad un totale di 32 utenti, in questa sezione si mostrano i dati relativi al campione di utenti interpellato, in particolare la distributione del sesso, dell'età, del titolo di studio, il tempo in cui si ascolta musica al giorno e se si usa la piattaforma Spotify per ascoltare musica.
+			        </p>
+					</div>
+					<div class="hero-playlist"></div>
+					<div id="content"  class="bg1 section center" style="float:left; width:100%;">
+			            <div id="datiCampione" style="width:1100px;height:1100px"></div>
+			        </div>
+				</div>
+			</div>
+
+			<div id= "Valutazione1" class="hero pad">
+				<div class="container">
+					<!-- hero content -->
+					<div class="hero-content " >
+						<!-- heading -->
+						<h4>Valutazione prima infografica - mappa degli streams</h4>
+						<hr>
+						<!-- paragraph -->
+						<p>Risultati dei test per la visualizzazione della <a href="#Mappa">mappa degli streams</a>.</p>
+					</div>
+					<div class="hero-playlist"></div>
+
+					<div class="section bg1">
+					<h4>Risultati test euristico</h4>
+		            <p class="par">
+		                Per questa visualizazione non sono emerse criricità da parte degli utenti.
+		            </p>
+
+		            <h4>Risultati questionari psicometrici</h4>
+		            <div class="hero-playlist"></div>
+		            <div id="content" class="bg1 section center" style="float:left;width:100%;">
+		                <div id="dashMappa" style="width:1100px;height:600px"></div>
+		            </div>
+
+		            <h4>Risultati test utente</h4>
+		            <p class="par">
+		                Sono stati posti agli utenti due differenti domande:</p>
+		                <ul class="par">
+		                    <li>Quanti streams hanno gli Stati Uniti D'America?
+		                        <ul>
+		                            <li>Risposta: 78.856.986</li>
+		                            <li>Tempo medio di risposta: 6,25 secondi</li>
+		                            <li>Tempo mediano di risposta: 7 secondi</li>
+		                            <li>Tasso di errore: 0%</li>
+		                        </ul>
+		                    </li>
+		                    <li>Quale paese tra Spagne e Italia ha la maggior quantità di streams?
+		                        <ul>
+		                            <li>Risposta: Spagna</li>
+		                            <li>Tempo medio di risposta: 6 secondi</li>
+		                            <li>Tempo mediano di risposta: 6,5 secondi</li>
+		                            <li>Tasso di errore: 0%</li>
+		                        </ul>
+		                    </li>
+		                    <li>Quale paese ha il maggior numero di streams?
+		                        <ul>
+		                            <li>Risposta: Stati Uniti d'America</li>
+		                            <li>Tempo medio di risposta: 5,625 secondi</li>
+		                            <li>Tempo mediano di risposta: 6 secondi</li>
+		                            <li>Tasso di errore: 0%</li>
+		                        </ul>
+		                    </li>
+		                </ul>
+		                <p class="par">Si mostra la distriduzione dei tempi di risposta tramite uno violin plot.</p>
+		            <div>
+		                <img class="imgCenter" src="img/ViolinPlot/ViolinPlot1.png">
+		            </div>
+				</div>
+			</div>
+
+			<div id= "Valutazione2" class="hero pad">
+				<div class="container">
+					<!-- hero content -->
+					<div class="hero-content " >
+						<!-- heading -->
+						<h4>Valutazione seconda infografica - correlazione tra streams e features delle canzoni</h4>
+						<hr>
+						<!-- paragraph -->
+						<p>Risultati dei test per la visualizzazione delle <a href="#Correlazioni">correlazioni tra streams e features delle canzoni</a></p>
+					</div>
+					<div class="hero-playlist"></div>
+
+					<div class="section bg1">
+					<h4>Risultati test euristico</h4>
+		            <p class="par">
+		                Un problema che si è riscontrato è stato la scarsa conoscenza del significato delle varie features che quindi rendeva difficile l'interpretazionede della visualizzazione. Per ovviare a questo problema si sono inserite le descrizioni delle varie features come riportate sulla documentazione di Spotify. Questa modifica è stata accettata di buon grado aumentando la soddisfazione degli utenti. Un'ulteriore questione sollevada dagli utenti riguardava il livello di confidenza degli intervalli, per questo si è inserita questa informazione sia nella descrizione che precede la visualizzazione sia nell'etichetta che viene visualizza al passaggio del mouse sopra il valori.
+		            </p>
+
+
+		            <h4>Risultati questionari psicometrici</h4>
+		            <div class="hero-playlist"></div>
+		            <div id="content" class="bg1 section center" style="float:left;width:100%;">
+		                <div id="dashCorr" style="width:1100px;height:600px"></div>
+		            </div>
+
+		            <h4>Risultati test utente</h4>
+		            <p class="par">
+		                Si è fissato il filtro della visualizzazione su un particolare paese, Italia. Sono stati posti agli utenti due differenti domande:</p>
+		                <ul class="par">
+		                    <li>Quale caratteristica è più correlata negativamente con il numero di streams per l'Italia?
+		                        <ul>
+		                            <li>Risposta: Duration</li>
+		                            <li>Tempo medio di risposta: 5,375 secondi</li>
+		                            <li>Tempo mediano di risposta: 5 secondi</li>
+		                            <li>Tasso di errore: 12.5%</li>
+		                            <li>Numero di risposte errate: 1</li>
+		                        </ul>
+		                    </li>
+		                    <li>Quante sono le caratteristica correlata positivamente con il numero di streams per l'Italia?
+		                        <ul>
+		                            <li>Risposta: 5</li>
+		                            <li>Tempo medio di risposta: 7,250 secondi</li>
+		                            <li>Tempo mediano di risposta: 7,5 secondi</li>
+		                        </ul>
+		                    </li>
+		                    <li>Quale features tra Instrumentalness e Loudness è più correlata negativamente con il numero di streams per l'Italia?
+		                        <ul>
+		                            <li>Risposta: Instrumentalness</li>
+		                            <li>Tempo medio di risposta: 6,875 secondi</li>
+		                            <li>Tempo mediano di risposta: 6,5 secondi</li>
+		                            <li>Tasso di errore: 0%</li>
+		                        </ul>
+		                    </li>
+		                </ul>
+		                <p class="par">Si mostra la distriduzione dei tempi di risposta tramite uno violin plot.</p>
+		            </p>
+		            <div>
+		                <img class="imgCenter" src="img/ViolinPlot/ViolinPlot2.png">
+		            </div>
+				</div>
+			</div>
+        </div>
+
+		<div id= "Valutazione3" class="hero pad">
+			<div class="container">
+				<!-- hero content -->
+				<div class="hero-content " >
+					<!-- heading -->
+					<h4>Valutazione terza infografica - andamento della frequenza dei temi nei testi delle canzoni</h4>
+					<hr>
+					<!-- paragraph -->
+					<p>Risultati dei test per la visualizzazione <a href="#Topic">dell'andamento della frequenza dei temi nei testi delle canzoni</a>.</p>
+
+				</div>
+				<div class="hero-playlist"></div>
+
+				<div class="section bg1">
+				<h4>Risultati test euristico</h4>
+	            <p class="par">
+	                Per questa visualizazione non sono emerse criricità da parte degli utenti.
+	            </p>
+
+
+	            <h4>Risultati test euristico</h4>
+		        <p class="par">
+		            Si è visto che alcuni utenti avevano difficoltà ad individuare l'esatta ampiezza dell'area rappresentante la frequenza per i vari temi, per ovviare a questo si è inserita la percentuale della frequenza rispetto al totale nelle etichette visibili durante l'interazione con l'infografica.<br>
+		            Inizialmente si sono mostravano un totale di 11 temi che rendevano l'interpretazione dell'infografica difficile, si è deciso quindi di mostrare solo i cinque temi più frequenti.
+		        </p>
+
+		        <h4>Risultati questionari psicometrici</h4>
+		        <div class="hero-playlist"></div>
+		        <div id="content" class="bg1 section center" style="float:left;width:100%;">
+		            <div id="dashTopic" style="width:1100px;height:600px"></div>
+		        </div>
+
+        		<h4>Risultati test utente</h4>
+		        <p class="par">
+		            Sono stati posti agli utenti due differenti domande:</p>
+		            <ul class="par">
+		                <li>Quale tema è dominante sull'intero periodo?
+		                    <ul>
+		                        <li>Risposta: Amore</li>
+		                        <li>Tempo medio di risposta: 5,875 secondi</li>
+		                        <li>Tempo mediano di risposta: 6 secondi</li>
+		                        <li>Tasso di errore: 0%</li>
+		                    </ul>
+		                </li>
+		                <li>Dal Luglio 2017 a Gennaio 2018 quale tema è maggiormente presente?
+		                    <ul>
+		                        <li>Risposta: Amore</li>
+		                        <li>Tempo medio di risposta: 6,375 secondi</li>
+		                        <li>Tempo mediano di risposta: 5 secondi</li>
+		                        <li>Tasso di errore: 0%</li>
+		                    </ul>
+		                </li>
+		                <li>In quale periodo il tem "Festa" raggiunge il massimo di frequenza?
+		                    <ul>
+		                        <li>Risposta: Ottobre 2019</li>
+		                        <li>Tempo medio di risposta: 7,625 secondi</li>
+		                        <li>Tempo mediano di risposta: 8,5 secondi</li>
+		                        <li>Tasso di errore: 12.5%</li>
+		                        <li>Numero di risposte errate: 1</li>
+		                    </ul>
+		                </li>
+		            </ul>
+		            <p class="par">Si mostra la distriduzione dei tempi di risposta tramite uno violin plot.</p>
+		        </p>
+		        <div>
+		            <img class="imgCenter" src="img/ViolinPlot/ViolinPlot3.png">
+		        </div>
+			</div>
+		</div>
+	</div>
+	<div id= "Team" class="hero pad">
+		<div class="container">
+			<!-- hero content -->
+			<div class="hero-content " >
+				<!-- heading -->
+				<h2>Membri del team</h2>
+				<hr>
+			</div>
+			<div>
+		        <ul class="par">
+		            <li>Lorenzo Camaione - 850380<br>
+		            Corso di laurea magistrale in Data Science<br>
+		            Università degli studi di Milano Bicocca - Dipartimento di Informatica, Sistemistica e Comunicazione DISCo</li>
+		            <li>Martino Lorenzo Tenconi - 803154<br>
+		            Università degli studi di Milano Bicocca - Dipartimento di Informatica, Sistemistica e Comunicazione DISCo</li>
+		            Corso di laurea magistrale in Data Science<br>
+		            <li>Simone D’amico - 850369<br>
+		            Università degli studi di Milano Bicocca - Dipartimento di Informatica, Sistemistica e Comunicazione DISCo</li>
+		            Corso di laurea magistrale in Data Science<br>
+		        </ul>
+		    </div>
+		</div>
+	</div>
+		
+	</body>	
+</html>
